@@ -4,6 +4,16 @@
 
 Allez, on va implémenter pour de vrai ce concurrent de Doctolib dont on te parle à longueur de ressource ! À toi d'être chirurgical 👩‍⚕️
 
+### Installation
+
+Ruby version 2.5.1
+Rails version 5.2.4.3
+
+    git clone git@github.com:Bashalir/freedoc.git
+    bundle install
+    <!-- pour tester l'implementation de la BDD -->
+    rails console --sandbox
+
 ### Les models
 
 Pour ce premier exercice, nous allons t'aider et te donner les models à créer :
