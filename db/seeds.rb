@@ -9,27 +9,27 @@
 require 'faker'
 Faker::Config.locale = 'fr'
 
-speciality = %w[Généraliste Pédiatre Cardiologue Gynécologue Ophtalmologue Allergologue]
+%w[Généraliste Pédiatre Cardiologue Gynécologue Ophtalmologue Allergologue].each { |speciality| Speciality.create(name: speciality) }
+%w[Paris Marseille Lyon Bordeaux Lille Metz].each { |city| City.create(name: city) }
 
 Doctor.destroy_all
 Patient.destroy_all
 Appointment.destroy_all
 
+20.times do
+  chosen_specialities = [Speciality.all.sample, Speciality.all.sample]
+  chosen_city = City.all.sample
 
-20.times do 
-  chosen_speciality = speciality.shuffle[0]
- 
-  doctor = Doctor.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, speciality: chosen_speciality, zipcode:
-  Faker::Address.zip_code)
-  patient = Patient.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
-
+  doctor = Doctor.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, zipcode:
+  Faker::Address.zip_code, city: chosen_city, specialities: chosen_specialities)
+  patient = Patient.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, city: chosen_city)
 end
 
 200.times do |i|
   datetime = Faker::Time.between(from: DateTime.now - (100 - i), to: DateTime.now - 100, format: :default)
 
-  chosen_doctor = Doctor.all.shuffle[0]
-  chosen_patient = Patient.all.shuffle[0]
+  chosen_doctor = Doctor.all.sample
+  chosen_patient = Patient.all.sample
 
-  appointment = Appointment.create(date: datetime, doctor: chosen_doctor, patient: chosen_patient)
+  appointment = Appointment.create(date: datetime, doctor: chosen_doctor, patient: chosen_patient, city: chosen_doctor.city)
 end
