@@ -15,6 +15,7 @@ Appointment.destroy_all
 City.destroy_all
 Speciality.destroy_all
 
+puts 'Destoy all Tables'
 
 %w[Généraliste Pédiatre Cardiologue Gynécologue Ophtalmologue Allergologue].each { |speciality| Speciality.create(name: speciality) }
 %w[Paris Marseille Lyon Bordeaux Lille Metz].each { |city| City.create(name: city) }
@@ -29,6 +30,7 @@ Speciality.destroy_all
   Faker::Address.zip_code, city: chosen_city, specialities: chosen_specialities)
   patient = Patient.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, city: chosen_city)
 end
+puts 'Add 20 Doctors and Patients'
 
 200.times do |i|
   datetime = Faker::Time.between(from: DateTime.now - (100 - i), to: DateTime.now - 100, format: :default)
@@ -38,3 +40,5 @@ end
 
   appointment = Appointment.create(date: datetime, doctor: chosen_doctor, patient: chosen_patient, city: chosen_doctor.city)
 end
+
+puts 'Add 200 Appointments'
