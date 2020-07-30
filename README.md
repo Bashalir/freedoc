@@ -11,6 +11,8 @@ Rails version 5.2.4.3
 
     git clone git@github.com:Bashalir/freedoc.git
     bundle install
+    rails db:migrate
+    rails db:seed
     <!-- pour tester l'implementation de la BDD -->
     rails console --sandbox
 
