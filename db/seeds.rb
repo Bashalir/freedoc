@@ -9,12 +9,17 @@
 require 'faker'
 Faker::Config.locale = 'fr'
 
-%w[Généraliste Pédiatre Cardiologue Gynécologue Ophtalmologue Allergologue].each { |speciality| Speciality.create(name: speciality) }
-%w[Paris Marseille Lyon Bordeaux Lille Metz].each { |city| City.create(name: city) }
-
 Doctor.destroy_all
 Patient.destroy_all
 Appointment.destroy_all
+City.destroy_all
+Speciality.destroy_all
+
+
+%w[Généraliste Pédiatre Cardiologue Gynécologue Ophtalmologue Allergologue].each { |speciality| Speciality.create(name: speciality) }
+%w[Paris Marseille Lyon Bordeaux Lille Metz].each { |city| City.create(name: city) }
+
+
 
 20.times do
   chosen_specialities = [Speciality.all.sample, Speciality.all.sample]
